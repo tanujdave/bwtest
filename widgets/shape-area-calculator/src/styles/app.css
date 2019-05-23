@@ -1,30 +1,31 @@
-.bw-shape-calculator {
-    padding: 30px 50px;
+.bw-shape-calculator {    
     font-size: 1.1em;
     color: #000;
+    background-color: transparent;
 }
-.bw-shape-calculator h4 {
-    line-height: 1.5em;
-    padding: 30px 0;
+.bw-shape-calculator.card {
+    border: none;
+}
+.bw-shape-calculator.card .card-title {
+    margin-bottom: 0;
+}
+.bw-shape-calculator .card-body {
+    padding: 3rem 2.6rem;
 }
 .bw-shape-calculator .form-check {
     padding: 8px;
     padding-left: 20px;
 }
-.bw-shape-calculator .middle {
-    min-height: 200px;
+.bw-shape-calculator .middle {    
     padding: 20px 0;
+    min-height: 300px;
 }
 .bw-shape-calculator input.form-control {
     width: 200px;
 }
-.bw-shape-calculator .footer {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
 .bw-shape-calculator input[type=button] {
-    padding-left: 45px;
-    padding-right: 45px;
+    padding-left: 35px;
+    padding-right: 35px;
     margin-right: 20px;
     color: #000 !important;
 }
@@ -32,5 +33,10 @@
     margin-right: 0;
 }
 .bw-shape-calculator .alert {
-    font-size: 0.8em;
+    font-size: 0.7em;
+    padding: 5px 8px;
+}
+.bw-shape-calculator .form-step-2 {
+    margin-top: auto;
+    margin-bottom: auto;
 }

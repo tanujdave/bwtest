@@ -27,7 +27,7 @@ export default class AbstractShapeArea {
     }
 
     get result() {
-        return `${this._result} ${this.unit()}`;
+        return `${this._result ? this._result.toFixed(2) : ''} ${this.unit()}`;
     }
 
     unit() {

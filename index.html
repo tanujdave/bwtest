@@ -4,16 +4,58 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>User Application</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">        
+        <link rel="stylesheet" type="text/css" href="./static/css/style.css">
     </head>
     <body>
-        <div id="app"></div>
+        <div class="bw-wrapper">
+            <header class="container-fluid header-content">
+                <div class="row">
+                    <div class="col col-sm-12 text-center">
+                        <div class="text-center">
+                            <img src="./static/images/BWLogo.png1" alt="bombayworks" />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="container body-content">
+                <div class="row">
+                    <div class="col col-sm-12 col-lg-6">
+                        <div class="card para-block no-border">
+                            <h3 class="card-title font-weight-bold">Welcome to Shape Calculator</h3>
+                            <p class="card-text">Shape Calculator is an interactive web application. To the right you will find the 3 step application. Follow the intstructions in each step. Clicking cancel will take you back to step1. Enjoy!</p>
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 col-lg-4">
+                        <div class="card widget-block no-border">
+                            <div id="app"></div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 col-lg-2">
+                        <div class="card banner-block no-border text-center">
+                            <p>120 x 370 (Vertical banner)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- plugin initialization -->
-        <script type="text/javascript" src="./widget/shape-area-calculator/dist/shape-area-calculator.js"></script>
+            <footer class="container-fluid footer-content">
+                <div class="row">
+                    <div class="col col-sm-12 text-center">
+                        <a href="https://bombayworks.com">bombayworks.com</a>
+                    </div>
+                </div>
+            </footer>
+        </div>        
+
+        <!-- shape area plugin initialization -->
+        <script type="text/javascript" src="./widgets/shape-area-calculator/dist/shape-area-calculator.js"></script>
         <script>
             (new ShapeAreaCalculator({
                 container: 'app'
-            })).init();
+            }));
         </script>
     </body>
 </html>

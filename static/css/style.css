@@ -1,0 +1,107 @@
+.bw-wrapper {
+    font-family: 'Roboto', sans-serif;
+}
+.bw-wrapper .header-content{
+    min-height: 20vh;
+    background-color: #7aceb4;
+}
+.bw-wrapper header {
+    position: relative;
+}
+.bw-wrapper .header-content div{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.bw-wrapper header .row{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.bw-wrapper header img{
+    width: 180px;
+}
+.bw-wrapper .body-content{
+    min-height: 65vh;
+    background-color: #ffffff;
+    padding-top: 100px;
+    padding: 85px 150px;
+    width: 1425px;
+    max-width: 100%;
+}
+.bw-wrapper .body-content .para-block{
+    font-size: 1.3rem;                
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.bw-wrapper .body-content .para-block h3 {
+    margin-bottom: 2rem;
+}
+.bw-wrapper .body-content .widget-block {
+    background-color: #efc96c;    
+}
+.bw-wrapper .banner-block {
+    font-size: 1.3rem;
+    background-color: #d8d8d8;
+    padding: 30px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.bw-wrapper .banner-block p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.bw-wrapper .no-border {
+    border: none;
+}
+.bw-wrapper .footer-content{
+    min-height: 15vh;
+    background-color: #0b142b;
+}
+.bw-wrapper footer {
+    position: relative;
+}
+.bw-wrapper .footer-content .row{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.bw-wrapper .footer-content a {
+    color: #7aceb4;
+    font-size: 1.4rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+.bw-wrapper .row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+.bw-wrapper .row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 992px) {
+    .bw-wrapper .body-content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .bw-wrapper .body-content .para-block {
+        padding: 0;
+        margin-bottom: 30px;
+    }
+    .bw-wrapper .body-content .widget-block {
+        margin-bottom: 30px;
+    }
+    .bw-wrapper .banner-block {
+        margin-bottom: 30px;
+        position: relative;
+        height: auto;
+    }
+  }

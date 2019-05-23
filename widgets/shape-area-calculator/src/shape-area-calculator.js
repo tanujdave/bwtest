@@ -1,5 +1,6 @@
 import config from './config/defaultOption';
 import stepContent from './config/formStepData';
+import BaseApp from './base-app';
 import {_base_tpl} from './templates/base_tpl';
 import {
     RectangleArea as rectangle, 
@@ -28,55 +29,40 @@ const AREA_PARAM_INPUT = 'area-param-input';
 /**
  * ShapeAreaCalculator class.
  */
-export class ShapeAreaCalculator {
+export class ShapeAreaCalculator extends BaseApp {
     
-    constructor({container = 'app', shapeList = []}) {
-        this.step = 0;
-        this.container = container;
-        this.selectedShape = null;
-        this.containerWrapper = document.querySelector(`#${container}`);
-        this.shapeList = shapeList.length > 0 ? shapeList : config.shapeList;
-        this.shapeList = this.shapeList.filter(shape => shapeClasses.hasOwnProperty(shape));
-        this.activeShapeObject = null;
-    }
+    constructor({container = 'app', shapeList = []}) {            
+        super(container);
+        let activeStep = 0;
+        let shapes = shapeList.length > 0 ? shapeList : config.shapeList;            
+        this.appContainer = container;
 
-    buildData() {
-        this.appData = {
-            activeStep: this.step,
-            shapeList: this.shapeList,
-            selectedShape: this.selectedShape,
-            stepContent: stepContent[this.step],
-            activeShapeObject: this.activeShapeObject,
-        };
-    }
-
-    init() {
-        this.buildData();
-        this.render();
-        this.bindEvents();
-    }
-
-    reset() {
-        this.step = 0;
-        this.selectedShape = null;
-        this.activeShapeObject = null;
-    }
+        this.setData({
+            activeStep: activeStep,
+            shapeList: shapes.filter(shape => shapeClasses.hasOwnProperty(shape)),
+            selectedShape: null,
+            stepContent: stepContent,
+            activeShapeObject: null
+        });                
+    }        
 
     selectElement(ele, all=false) {
         if (all) {
-            return document.querySelectorAll(`#${this.container} ${ele}`);    
+            return document.querySelectorAll(`#${this.appContainer} ${ele}`);    
         }
-        return document.querySelector(`#${this.container} ${ele}`);
+        return document.querySelector(`#${this.appContainer} ${ele}`);
     }
 
     stepValidation(action) {
-        if (action === NEXT_ACTION && 0 === this.step) {
-            if (!this.selectedShape) {
+        const {activeStep, selectedShape, activeShapeObject} = this.data;
+
+        if (action === NEXT_ACTION && 0 === activeStep) {
+            if (!selectedShape) {
                 throw new Error('Please select shape.');
             }
-        } else if (action === NEXT_ACTION && 1 === this.step) {
-            Object.keys(this.activeShapeObject.params).map(function(key) {
-                if (!this.activeShapeObject.params[key]) {
+        } else if (action === NEXT_ACTION && 1 === activeStep) {
+            Object.keys(activeShapeObject.params).map(function(key) {
+                if (!activeShapeObject.params[key]) {
                     throw new Error('Area parameters cannot be empty.');
                 }
             }.bind(this));
@@ -99,17 +85,27 @@ export class ShapeAreaCalculator {
     }
 
     process(action) {
+        const {activeStep, activeShapeObject} = this.data;
+        let step = activeStep;
+
         if (NEXT_ACTION === action) {
-            this.step = this.step + 1;
-            if (2 === this.step) {
-                this.activeShapeObject.area();
-            }
-        } else if (CANCEL_ACTION === action) {
-            this.step = this.step - 1;
-        } else if (START_OVER_ACTION === action) {
-            this.reset();
+            step = activeStep + 1;
+            if (2 === step) {
+                activeShapeObject.area();
+            }            
+        } else if (CANCEL_ACTION === action) {                        
+            step = activeStep - 1;
+        } else if (START_OVER_ACTION === action) {            
+            this.setData({
+                activeStep: 0,
+                selectedShape: null,
+                activeShapeObject: null,                
+            })
+            return;
         }
-        this.init();
+        this.setData({
+            activeStep: step
+        });    
     }
 
     bindEvents() {
@@ -119,9 +115,11 @@ export class ShapeAreaCalculator {
     }
 
     bindParamsInputEvent() {
+        const {activeShapeObject} = this.data;
+
         this.selectElement(`[name=${AREA_PARAM_INPUT}]`, true).forEach(function (ele, idx) {
             ele && ele.addEventListener('blur', function (e) {
-                this.activeShapeObject.setParams(
+                activeShapeObject.setParams(
                     e.target.id.split('-')[1], 
                     e.target.value
                 );
@@ -136,23 +134,23 @@ export class ShapeAreaCalculator {
     }
 
     bindShapeSelectEvent() {
+        const {selectedShape, activeShapeObject} = this.data;
+
         this.selectElement(`[name=${SELECT_SHAPE}]`, true).forEach(function (ele, idx) {
-            ele && ele.addEventListener('click', function (e) {
-                this.selectedShape = e.target.value;
+            ele && ele.addEventListener('click', function (e) {                
                 if (!shapeClasses.hasOwnProperty(e.target.value)) {
                     return;
                 }
-                this.activeShapeObject = new shapeClasses[e.target.value]();
+                this.setData({
+                    selectedShape: e.target.value,
+                    activeShapeObject: new shapeClasses[e.target.value]()
+                })
                 this.renderError(null);
             }.bind(this));
         }.bind(this))
     }
 
-    getSelectedStepHtml() {
-        return _base_tpl(this.appData);
-    }
-
-    render() {
-        this.containerWrapper.innerHTML = this.getSelectedStepHtml();
+    getRenderContent() {        
+        return _base_tpl(this.data);
     }
 }
