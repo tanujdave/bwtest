@@ -29,6 +29,10 @@
     margin-right: 20px;
     color: #000 !important;
 }
+.bw-shape-calculator .btn-success {
+    background-color: #7aceb4;
+    border: none;
+}
 .bw-shape-calculator input[type=button]:last-child {
     margin-right: 0;
 }
@@ -39,4 +43,10 @@
 .bw-shape-calculator .form-step-2 {
     margin-top: auto;
     margin-bottom: auto;
+}
+.bw-pop-message {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    margin-bottom: 0;
 }

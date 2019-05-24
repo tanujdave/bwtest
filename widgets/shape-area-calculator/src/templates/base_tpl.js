@@ -22,7 +22,6 @@ export const _base_tpl = (data) => {
                 <div class="middle row">
                     <div class="col col-sm-12">
                         ${description && `<p class="card-text">${description.replace('{AREA_RESULT}', result)}</p>`}  
-                        <div class="error-message alert alert-danger" style="display:none;"></div>
                         <div class="form-wrapper form-group form-step-${activeStep}">
                             ${activeStep === 0 ? _area_shape_option_tpl(shapeList, selectedShape) : ''}
                             ${activeStep === 1 ? _area_params_input_tpl(params) : ''}

@@ -1,12 +1,21 @@
+import PopMessage from "./pop-message";
+
 /**
  * BaseApp class.
  */
 export default class BaseApp {
 
-    constructor({container = 'app'}) {
+    constructor(container) {
         this.data = {};        
-        this.appContainer = container;        
+        this.appContainer = container;
         this.containerWrapper = document.querySelector(`#${this.appContainer}`);
+        this.popMessage = new PopMessage();
+
+
+        if(!this.containerWrapper) {
+            this.popMessage.danger(`Container not found for given id#${container}`);
+            return;
+        }
     }    
 
     setData(data) {
@@ -24,6 +33,9 @@ export default class BaseApp {
     }
 
     render() {
+        if(!this.containerWrapper) {
+            return;
+        }
         this.containerWrapper.innerHTML = this.getRenderContent();
     }
 }

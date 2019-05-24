@@ -25,13 +25,12 @@ const START_OVER_ACTION = 'start-over-action';
 const SELECT_SHAPE = 'select-shape';
 const AREA_PARAM_INPUT = 'area-param-input';
 
-
 /**
  * ShapeAreaCalculator class.
  */
 export class ShapeAreaCalculator extends BaseApp {
     
-    constructor({container = 'app', shapeList = []}) {            
+    constructor({container, shapeList = []}) {
         super(container);
         let activeStep = 0;
         let shapes = shapeList.length > 0 ? shapeList : config.shapeList;            
@@ -43,7 +42,7 @@ export class ShapeAreaCalculator extends BaseApp {
             selectedShape: null,
             stepContent: stepContent,
             activeShapeObject: null
-        });                
+        });
     }        
 
     selectElement(ele, all=false) {
@@ -75,13 +74,8 @@ export class ShapeAreaCalculator extends BaseApp {
             this.stepValidation(action);
             this.process(action);
         } catch (error) {
-            this.renderError(error);
+            this.popMessage.danger(error);
         }
-    }
-
-    renderError(message) {
-        this.selectElement('.error-message').innerHTML = message;
-        this.selectElement('.error-message').style.display = message ? 'block' : 'none';
     }
 
     process(action) {
@@ -95,6 +89,9 @@ export class ShapeAreaCalculator extends BaseApp {
             }            
         } else if (CANCEL_ACTION === action) {                        
             step = activeStep - 1;
+            if (0 == step) {
+                activeShapeObject.resetParams();
+            }
         } else if (START_OVER_ACTION === action) {            
             this.setData({
                 activeStep: 0,
@@ -145,7 +142,6 @@ export class ShapeAreaCalculator extends BaseApp {
                     selectedShape: e.target.value,
                     activeShapeObject: new shapeClasses[e.target.value]()
                 })
-                this.renderError(null);
             }.bind(this));
         }.bind(this))
     }

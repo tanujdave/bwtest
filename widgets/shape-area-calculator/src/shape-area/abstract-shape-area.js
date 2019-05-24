@@ -22,6 +22,12 @@ export default class AbstractShapeArea {
         this.params[param] = value;
     }
 
+    resetParams() {
+        Object.keys(this.params).map(function (key) {
+            this.params[key] = null;
+        }.bind(this));
+    }
+
     area() {
         throw new Error('You must have to implement this `area` method.');
     }
