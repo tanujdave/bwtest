@@ -3,6 +3,7 @@ import {_footer_action_tpl} from './footer_action_tpl';
 import {_area_shape_option_tpl} from './area_shape_option_tpl';
 import {_area_params_input_tpl} from './area_params_input_tpl';
 import {_area_result_tpl} from './area_result_tpl';
+import {replaceStringKyes} from '../utils';
 
 
 export const _base_tpl = (data) => {
@@ -16,12 +17,12 @@ export const _base_tpl = (data) => {
             <div class="card-body">
                 <div class="header row">
                     <div class="col col-sm-12">
-                        ${_header_tpl(heading, description, result)}                    
+                        ${_header_tpl(heading)}                    
                     </div>
                 </div>
                 <div class="middle row">
                     <div class="col col-sm-12">
-                        ${description && `<p class="card-text">${description.replace('{AREA_RESULT}', result)}</p>`}  
+                        ${description && `<p class="card-text">${replaceStringKyes(description, {AREA_NAME: selectedShape, AREA_RESULT: result})}</p>`}  
                         <div class="form-wrapper form-group form-step-${activeStep}">
                             ${activeStep === 0 ? _area_shape_option_tpl(shapeList, selectedShape) : ''}
                             ${activeStep === 1 ? _area_params_input_tpl(params) : ''}

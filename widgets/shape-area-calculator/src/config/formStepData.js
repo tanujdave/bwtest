@@ -19,7 +19,7 @@ const stepData = [
     },
     {
         heading: "Step 3 - Your Results",
-        description: "You have calculated the area of rectangle to be {AREA_RESULT}. Below is your result:",
+        description: "You have calculated the area of {AREA_NAME} to be {AREA_RESULT}. Below is your result:",
         actions : {
             next: false,
             cancel: false,
