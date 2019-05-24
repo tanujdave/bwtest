@@ -70,6 +70,7 @@ export class ShapeAreaCalculator extends BaseApp {
 
     actionHandler(event) {
         const action = event.target.id;
+        
         try {
             this.stepValidation(action);
             this.process(action);

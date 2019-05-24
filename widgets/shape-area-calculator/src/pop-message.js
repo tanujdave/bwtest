@@ -1,3 +1,6 @@
+/**
+ * PopMessage class.
+ */
 export default class PopMessage {
 
     constructor() {

@@ -4,6 +4,7 @@ import config from '../config/defaultOption';
  * AbstractShapeArea class.
  */
 export default class AbstractShapeArea {
+    
     constructor() {
         this.params = {}
         this._result = null;

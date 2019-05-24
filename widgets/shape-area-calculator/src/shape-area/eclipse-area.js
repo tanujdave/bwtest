@@ -5,6 +5,7 @@ import AbstractShapeArea from './abstract-shape-area';
  * EclipseArea class.
  */
 export default class EclipseArea extends AbstractShapeArea {
+    
     constructor() {
         super();
         this.params = {

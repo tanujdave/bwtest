@@ -5,6 +5,7 @@ import AbstractShapeArea from './abstract-shape-area';
  * SquareArea class.
  */
 export default class SquareArea extends AbstractShapeArea {
+    
     constructor() {
         super();
         this.params = {
